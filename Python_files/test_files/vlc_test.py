@@ -100,7 +100,7 @@ class ApplicationWindow(Gtk.Window):
 
 if __name__ == '__main__':
 #    while True:
-    MRL = '/home/pi/raspi_gui/media/Video2.mp4'
+    MRL = '/home/pi/raspi_gui/media/edificio.avi'
     window = ApplicationWindow()
     window.setup_objects_and_events()
     window.show()

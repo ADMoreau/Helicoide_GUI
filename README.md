@@ -1,3 +1,5 @@
+![Screenshot](media/21:16:28.png?raw=true "Demo")
+
 # GUI
 
 This project works to develop a user interface for immersive artwork utilizing AR, ML and ran on an overclocked (overclocking improves FPS by ~12%) raspberry pi 3B. The program works by using a computer vision model which utilizes tflite model compression to produce a homography matrix that projects a set of anchor points onto an artwork in a circular pattern. From these anchor points the point closest to the camera is selected and from this point a short gif using the frames from files stored in the python directory and selected via the timesteps stored in the csv file to demo a video, which if clicked on plays said video. Homography matrix was used as the artworks was very difficult to use a technique like SLAM to localize the camera position to accomplish similar means. Likewise, the model compression would lead the machine vison model to perform poorly if the points were outside of the training distribution. Once the media has been run, the process is begun again from the beginning.

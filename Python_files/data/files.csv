@@ -1,0 +1,16 @@
+frame,filepath,begin,end
+frame_a,/home/pi/raspi_gui/media/libro.mp4,00:00,00:05
+frame_b,/home/pi/raspi_gui/media/meta.mp4,00:00,00:05
+frame_c,/home/pi/raspi_gui/media/bbc.mp4,00:00,00:05 
+frame_d,/home/pi/raspi_gui/media/presos.mp4,00:00,00:05
+frame_e,/home/pi/raspi_gui/media/estudiantes.mp4,00:00,00:05
+frame_f,/home/pi/raspi_gui/media/bachelet.mp4,00:00,00:05
+frame_g,/home/pi/raspi_gui/media/edificio.avi,00:00,00:05
+frame_h,/home/pi/raspi_gui/media/sebin.mp4,00:00,00:05
+frame_i,/home/pi/raspi_gui/media/madre.mp4,00:00,00:05
+frame_j,/home/pi/raspi_gui/media/estadio.mp4,00:00,00:05
+frame_k,/home/pi/raspi_gui/media/tension.mp4,00:00,00:05
+frame_l,/home/pi/raspi_gui/media/becerro.mov,00:00,00:05
+frame_m,/home/pi/raspi_gui/media/Gijoe.mp4,00:00,00:05
+frame_n,/home/pi/raspi_gui/media/abrazo.mp4,00:00,00:05
+frame_o,/home/pi/raspi_gui/media/presospoliticos.mp4,00:00,00:05
