@@ -178,7 +178,7 @@ class Window():
     
     def main_button_callback(self, event, x, y, flags, params):
         """
-        funtion to play the video corresponding to the given gif and x, y values
+        function to play the video corresponding to the given gif and x, y values
         """
         if event == cv2.EVENT_LBUTTONDOWN:
             #if x in range(740, 800) and y in range(0, 55):
