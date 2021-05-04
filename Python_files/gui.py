@@ -195,8 +195,5 @@ class Window():
                 window.vlcInstance.release()
                 #del window
                 self.break_mutex = True
-<<<<<<< HEAD
                 self.cap.release()
-=======
->>>>>>> 834cffc43beeffc20b6b8b34acce16de1c35e16f
                 return
