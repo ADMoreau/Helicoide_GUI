@@ -189,9 +189,11 @@ class Window():
                 window = ApplicationWindow(MRL)
                 window.setup_objects_and_events()
                 window.show()
+                button.when_released = window.stop_player
                 Gtk.main()
-                window.player.stop()
+
                 window.vlcInstance.release()
                 #del window
                 self.break_mutex = True
+                self.cap.release()
                 return
