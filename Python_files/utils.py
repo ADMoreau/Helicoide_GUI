@@ -11,7 +11,7 @@ class Projector():
     model
     """
 
-    def __init__(self, model_path='/home/pi/homography_small.tflite'):
+    def __init__(self, model_path='/home/pi/Helicoide_GUI/assets/homography_small.tflite'):
 
         # Load the TFLite model and allocate tensors.
         self.homography_interpreter = tf.lite.Interpreter(model_path=model_path)

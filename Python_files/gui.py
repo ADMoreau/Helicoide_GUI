@@ -1,10 +1,12 @@
 import cv2
+import os
 import numpy as np
 from points import inner_points, inner_points_upper, center_points
 from vlc_utils import ApplicationWindow
 from utils import Projector
 import time
 from gpiozero import Button
+from ffpyplayer.player import MediaPlayer
 
 import gi
 gi.require_version('Gtk', '3.0')                                                                                                          
@@ -38,7 +40,6 @@ class Window():
         cv2.moveWindow(self.window_name_1, 80, 0)
         #window callback if screen is tapped
         cv2.setMouseCallback(self.window_name_1, self.main_button_callback)
-        #cv2.setMouseCallback(self.window_name_1, self.main_button_callback)
         
         try:
             while (self.cap.isOpened()) :
@@ -53,7 +54,7 @@ class Window():
                     #if scan button is pressed run routine
                     if button.is_pressed == False:
                         self.button_demo()
-                        time.sleep(1)
+                        #time.sleep(1)
                     #if escape button is pressed
                     if (cv2.waitKey(10)==27) or self.break_mutex == True:
                         print("Escaped")
@@ -169,7 +170,7 @@ class Window():
                 #show the edited video frame
                 cv2.imshow(self.window_name_1, self.h_frame)
                 #escape button on keyboard
-                if (cv2.waitKey(10)==27) or self.break_mutex == True:
+                if (cv2.waitKey(10)==27) or self.break_mutex == True or button.is_pressed == False:
                     break
             except Exception as e:
                 print("Exeption : " + str(e) + " " + str(i))
@@ -181,19 +182,42 @@ class Window():
         function to play the video corresponding to the given gif and x, y values
         """
         if event == cv2.EVENT_LBUTTONDOWN:
-            #if x in range(740, 800) and y in range(0, 55):
             if self.frame_pos != {}:
-                index = self.button_frame[y, x]
-                #index = self.video_data.index[self.video_data['frame'] == self.max_key][0]
-                MRL = self.video_data['filepath'][index]
-                window = ApplicationWindow(MRL)
-                window.setup_objects_and_events()
-                window.show()
-                button.when_released = window.stop_player
-                Gtk.main()
+                try:
+                    index = self.button_frame[y, x]
+                    MRL = self.video_data['filepath'][index]
+                    self.cap.release()
+                    print(MRL)
+                    temp_cap = cv2.VideoCapture(MRL)
+                    fps = temp_cap.get(cv2.CAP_PROP_FPS)
+                    player = MediaPlayer(MRL)
+                    _wait_flag = True
+                    while _wait_flag:
+                        now = time.time()
+                        ret, img = temp_cap.read()
+                        print("cap read")
+                        audio_frame, val = player.get_frame()
+                        print("audio read")
+                        if ret:
+                            cv2.imshow(self.window_name_1, img)
+                            if (cv2.waitKey(10)==27) or button.is_pressed == False:
+                                break
+                        else:
+                            _wait_flag = False
+                        if val != 'eof' and audio_frame is not None:
+                            #audio
+                            img, t = audio_frame
+                        #prevent uneven/ spead up playback
+                        timeDiff = time.time() - now
+                        if (timeDiff < 1.0/(fps)):
+                            time.sleep(1.0/(fps) - timeDiff)
+                    temp_cap.release()
 
-                window.vlcInstance.release()
-                #del window
-                self.break_mutex = True
-                self.cap.release()
-                return
+                except Exception as e:
+                    print(f"============================\n\n\n\nEXCEPTION THROWN\n{e}\n\n\n============================")
+                finally:
+                    print("EXITING")
+                    self.break_mutex = True
+            
+            
+            
