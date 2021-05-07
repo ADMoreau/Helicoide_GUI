@@ -2,7 +2,6 @@ import cv2
 import os
 import numpy as np
 from points import inner_points, inner_points_upper, center_points
-from vlc_utils import ApplicationWindow
 from utils import Projector
 import time
 from gpiozero import Button
